@@ -1,0 +1,15 @@
+{
+  "name": "advent-of-code-2021",
+  "version": "1.0.0",
+  "description": "Advent Of Code 2021",
+  "author": "twistezo",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "@types/node": "^16.11.12"
+  },
+  "scripts": {
+    "start": "ts-node-dev",
+    "start:w": "ts-node-dev --respawn"
+  }
+}
