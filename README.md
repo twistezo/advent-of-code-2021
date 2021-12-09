@@ -12,8 +12,8 @@ https://adventofcode.com/
 
 - Firstly run `npm install`
 
-- To run specific file use `npm run start -- FILENAME`
+- To run specific file use `npm run start FILENAME`
 
-  For example `npm run start -- 1.ts`
+  For example `npm run start 1.ts`
 
-- To run specific file in watch mode use `npm run start:w -- FILENAME`
+- To run specific file in watch mode use `npm run start:w FILENAME`

@@ -67,9 +67,6 @@ const calculateCourse = (commands: Command[]): Course => {
   return course
 }
 
-const course = calculateCourse(commands)
-console.log('Part one result:', course.horizotnalPos * course.depth)
-
 const calculateCourseWithAim = (commands: Command[]): Course => {
   let course: Course = {
     horizotnalPos: 0,
@@ -105,6 +102,9 @@ const calculateCourseWithAim = (commands: Command[]): Course => {
 
   return course
 }
+
+const course = calculateCourse(commands)
+console.log('Part one result:', course.horizotnalPos * course.depth)
 
 const courseWithAim = calculateCourseWithAim(commands)
 console.log('Part two result:', courseWithAim.horizotnalPos * courseWithAim.depth)
