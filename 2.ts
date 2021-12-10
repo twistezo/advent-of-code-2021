@@ -107,4 +107,7 @@ const course = calculateCourse(commands)
 console.log('Part one result:', course.horizotnalPos * course.depth)
 
 const courseWithAim = calculateCourseWithAim(commands)
-console.log('Part two result:', courseWithAim.horizotnalPos * courseWithAim.depth)
+console.log(
+  'Part two result:',
+  courseWithAim.horizotnalPos * courseWithAim.depth
+)

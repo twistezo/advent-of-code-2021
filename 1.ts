@@ -37,5 +37,7 @@ const convertToThreeMeasurementSlidingWindows = (data: number[]): number[] => {
 const partOne = countNumberOfIncreasesDepths(sonarData)
 console.log('Part one result:', partOne)
 
-const partTwo = countNumberOfIncreasesDepths(convertToThreeMeasurementSlidingWindows(sonarData))
+const partTwo = countNumberOfIncreasesDepths(
+  convertToThreeMeasurementSlidingWindows(sonarData)
+)
 console.log('Part two result:', partTwo)

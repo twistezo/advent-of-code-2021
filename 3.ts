@@ -17,7 +17,9 @@ const diagnosticReport: string[] = fs
   .split('\n')
   .filter(x => x)
 
-const calculatePowerConsumption = (diagnosticReport: string[]): PowerConsumptionResult => {
+const calculatePowerConsumption = (
+  diagnosticReport: string[]
+): PowerConsumptionResult => {
   let mostCommonBits: number[] = []
   let leastCommonBits: number[] = []
 
@@ -56,7 +58,11 @@ const getVerticalBits = (diagnosticReport: string[]): string[][] => {
 
 const getMostCommonNumber = (numbers: number[]): number =>
   numbers
-    .sort((a, b) => numbers.filter(v => v === a).length - numbers.filter(v => v === b).length)
+    .sort(
+      (a, b) =>
+        numbers.filter(v => v === a).length -
+        numbers.filter(v => v === b).length
+    )
     .pop()!
 
 const turnOverBit = (number: number): number => (number === 0 ? 1 : 0)
@@ -68,7 +74,9 @@ const determineRating = (
 ) => {
   const { mostCommonBits, leastCommonBits } = powerConsumptionResult
   const powerConsumptionBits: number[] =
-    ratingType === RatingType.MOST_COMMON_BITS ? mostCommonBits : leastCommonBits
+    ratingType === RatingType.MOST_COMMON_BITS
+      ? mostCommonBits
+      : leastCommonBits
 
   let bitLastPosition: number = 0
   let shouldStop: boolean = false
@@ -81,7 +89,9 @@ const determineRating = (
         return
       }
 
-      const rowBits: number[] = row.split('').map((b: string): number => parseInt(b))
+      const rowBits: number[] = row
+        .split('')
+        .map((b: string): number => parseInt(b))
       const pcb: number = powerConsumptionBits[i]
       const currentBit: number = rowBits[i]
 
