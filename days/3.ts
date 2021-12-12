@@ -12,7 +12,7 @@ interface PowerConsumptionResult {
 }
 
 const diagnosticReport: string[] = fs
-  .readFileSync('3.txt')
+  .readFileSync('data/3.txt')
   .toString()
   .split('\n')
   .filter(x => x)

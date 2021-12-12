@@ -9,14 +9,14 @@ interface WinnerBoard {
 }
 
 const numbers: number[] = fs
-  .readFileSync('4.txt')
+  .readFileSync('data/4.txt')
   .toString()
   .split('\n')[0]
   .split(',')
   .map(n => parseInt(n))
 
 const rawBoards: number[][] = fs
-  .readFileSync('4.txt')
+  .readFileSync('data/4.txt')
   .toString()
   .split('\n')
   .filter(e => e)

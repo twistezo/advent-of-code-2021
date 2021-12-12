@@ -20,7 +20,7 @@ enum Position {
 }
 
 const commands: Command[] = fs
-  .readFileSync('2.txt')
+  .readFileSync('data/2.txt')
   .toString()
   .split('\n')
   .filter((x: string): string => x)

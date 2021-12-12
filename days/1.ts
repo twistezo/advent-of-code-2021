@@ -1,7 +1,7 @@
 import fs from 'fs'
 
 const sonarData: number[] = fs
-  .readFileSync('1.txt')
+  .readFileSync('data/1.txt')
   .toString()
   .split('\n')
   .map((x: string): number => parseInt(x))
