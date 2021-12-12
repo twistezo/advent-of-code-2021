@@ -83,7 +83,7 @@ const determineRating = (
   let filteredReport: string[] = diagnosticReport
   let filters: string[] = []
 
-  powerConsumptionBits.forEach((_, i: number) => {
+  for (let [i] of powerConsumptionBits.entries()) {
     filters = filteredReport.filter((row: string, j) => {
       if (shouldStop) {
         return
@@ -108,7 +108,7 @@ const determineRating = (
     }
 
     filteredReport = filteredReport.filter(bits => filters.includes(bits))
-  })
+  }
 
   return parseInt(chooseResult(ratingType, filteredReport, bitLastPosition), 2)
 }
@@ -146,4 +146,6 @@ const co2GeneratorRating = determineRating(
   powerConsumptionResult
 )
 
-console.log('Part two result:', oxygenGeneratorRating * co2GeneratorRating)
+if (oxygenGeneratorRating && co2GeneratorRating) {
+  console.log('Part two result:', oxygenGeneratorRating * co2GeneratorRating)
+}
