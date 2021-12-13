@@ -10,6 +10,6 @@
   },
   "scripts": {
     "start": "ts-node-dev",
-    "start:w": "ts-node-dev --respawn"
+    "start:w": "ts-node-dev --respawn --cls"
   }
 }
