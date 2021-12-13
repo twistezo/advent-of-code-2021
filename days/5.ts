@@ -6,8 +6,8 @@ interface Point {
 }
 
 interface Line {
-  start: Point
-  end: Point
+  a: Point
+  b: Point
 }
 
 type Board = any[][]
@@ -27,21 +27,20 @@ const linesOfVents: Line[] = fs
   )
   .map(
     (points: Point[]): Line => ({
-      start: points[0],
-      end: points[1],
+      a: points[0],
+      b: points[1],
     })
   )
   .slice(0, -1)
 
 // HW: Horizontal and Vertical
 const linesHW = [...linesOfVents].filter(
-  (line: Line): boolean =>
-    line.start.x === line.end.x || line.start.y === line.end.y
+  (line: Line): boolean => line.a.x === line.b.x || line.a.y === line.b.y
 )
 
 const slope = (line: Line): number => {
-  const { start, end } = line
-  return (end.y - start.y) / (end.x - start.x)
+  const { a, b } = line
+  return (b.y - a.y) / (b.x - a.x)
 }
 
 // D: Diagonal
@@ -49,7 +48,7 @@ const linesD = [...linesOfVents].filter(
   (line: Line) => Math.abs(slope(line)) === 1
 )
 
-const boarSideSize = Math.pow(10, linesHW[0].start.x.toString().length)
+const boarSideSize = Math.pow(10, linesHW[0].a.x.toString().length)
 const board: Board = Array.from(Array(boarSideSize), () =>
   new Array(boarSideSize).fill(0)
 )
@@ -57,28 +56,28 @@ const board: Board = Array.from(Array(boarSideSize), () =>
 const getHWPoints = (lines: Line[]): Point[] => {
   let points: Point[] = []
   lines.forEach((line: Line) => {
-    const { start, end } = line
+    const { a, b } = line
 
-    if (start.x === end.x) {
-      const min = Math.min(start.y, end.y)
-      const max = Math.max(start.y, end.y)
+    if (a.x === b.x) {
+      const min = Math.min(a.y, b.y)
+      const max = Math.max(a.y, b.y)
       const yPoints = getNumbersBetween(min, max)
 
       yPoints.forEach((n: number) => {
         points.push({
-          x: start.x,
+          x: a.x,
           y: n,
         })
       })
-    } else if (start.y === end.y) {
-      const min = Math.min(start.x, end.x)
-      const max = Math.max(start.x, end.x)
+    } else if (a.y === b.y) {
+      const min = Math.min(a.x, b.x)
+      const max = Math.max(a.x, b.x)
       const xPoints = getNumbersBetween(min, max)
 
       xPoints.forEach((n: number) => {
         points.push({
           x: n,
-          y: start.y,
+          y: a.y,
         })
       })
     }
@@ -99,11 +98,11 @@ const getNumbersBetween = (min: number, max: number): number[] => {
 const getDPoints = (lines: Line[]): Point[] => {
   let points: Point[] = []
   lines.forEach((line: Line) => {
-    const { start, end } = line
-    const slope: number = (end.y - start.y) / (end.x - start.x)
-    const intercept = start.y - slope * start.x
-    const minX = Math.min(start.x, end.x)
-    const maxX = Math.max(start.x, end.x)
+    const { a, b } = line
+    const slope: number = (b.y - a.y) / (b.x - a.x)
+    const intercept = a.y - slope * a.x
+    const minX = Math.min(a.x, b.x)
+    const maxX = Math.max(a.x, b.x)
 
     for (let x = minX; x <= maxX; x++) {
       const y = slope * x + intercept
