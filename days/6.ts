@@ -1,49 +1,62 @@
 import fs from 'fs'
 
-interface Fish {
-  daysToBorn: number
-  sum: number
-}
+type DayToBorn = number
 
-const fish: Fish[] = fs
+const fish: DayToBorn[] = fs
   .readFileSync('data/6.txt')
   .toString()
   .trim()
   .split(',')
-  .map(
-    (e: string): Fish => ({
-      daysToBorn: parseInt(e),
-      sum: 0,
-    })
-  )
+  .map((e: string): DayToBorn => parseInt(e))
 
-const reproduce = (days: number) => {
-  let reproduction: Fish[][] = [[...fish]]
+const reproduce = (initialDays: DayToBorn[], days: number): number => {
+  let reproduction = [[...initialDays]]
+
   for (let i = 1; i <= days; i++) {
-    const prevFish = reproduction[i - 1]
-    // console.log('prevFish', prevFish)
+    const prevDays = reproduction[0]
+    const newFishes: DayToBorn[] = []
 
-    const bornFish: Fish[] = []
-    const fish = prevFish.map((f: Fish) => {
-      const { daysToBorn, sum } = f
-
-      if (daysToBorn > 0) {
-        const guessed = f.daysToBorn - 1
-        return { daysToBorn: guessed, sum: sum + guessed }
+    const currDays = prevDays.map((dtb: DayToBorn) => {
+      if (dtb > 0) {
+        return dtb - 1
       } else {
-        bornFish.push({ daysToBorn: 8, sum: 0 })
-        return { daysToBorn: 6, sum: 0 }
+        newFishes.push(8)
+        return 6
       }
     })
 
-    reproduction.push([...fish, ...bornFish])
+    reproduction.push([...currDays, ...newFishes])
+    reproduction.shift()
   }
 
-  return reproduction
+  return reproduction[reproduction.length - 1].length
 }
 
-const reproductionA = reproduce(80)
-console.log('Part one result:', reproductionA[reproductionA.length - 1].length)
+const reproduceWithGroups = (
+  initialDays: DayToBorn[],
+  days: number
+): number => {
+  const groups: number[] = new Array(9).fill(0)
+  initialDays.forEach((fish: number) => {
+    groups[fish] += 1
+  })
 
-// const reproductionB = reproduce(80)
-// console.log('Part one result:', reproductionB[reproductionB.length - 1].length)
+  for (let i = 0; i < days; i++) {
+    const newFishes = groups.shift()!
+    groups.push(newFishes)
+    groups[6] += newFishes
+  }
+
+  let sum = 0
+  groups.forEach((g: number) => {
+    sum += g
+  })
+
+  return sum
+}
+
+const reproductionA = reproduce(fish, 80)
+console.log('Part one result:', reproductionA)
+
+const reproductionB = reproduceWithGroups(fish, 256)
+console.log('Part two result:', reproductionB)
